@@ -35,5 +35,5 @@ services:
     restart: unless-stopped
     volumes:
       - ./data/grafana_data/grafana_var:/var/lib/grafana
-      - ./data/grafana_data/grafana_etc:/etc/grafana:rw
+      - ./data/grafana_data/grafana_etc:/etc/grafana
 
