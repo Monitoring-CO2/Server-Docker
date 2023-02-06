@@ -1,0 +1,39 @@
+version: '3'
+services:
+  server_co2:
+    image: ghcr.io/monitoring-co2/backend-server:main
+    # build: .
+    ports:
+      - "8090:8080" # expose to outside
+    depends_on:
+      - mongodb_co2
+      - influxdb_co2
+      - grafana_co2
+    restart: unless-stopped
+
+  mongodb_co2:
+    image: mongo:6.0.3
+    # ports:
+      # - "27017:27017" # no expose to outside
+    restart: unless-stopped
+    volumes: 
+      - ./data/mongoDB_data:/data/db
+
+  influxdb_co2:
+    image: influxdb:2.6.1
+    # ports:
+    #   - "8092:8086" # no expose to outside
+    restart: unless-stopped
+    volumes:
+      - ./data/influxDB_data:/var/lib/influxdb2
+
+  grafana_co2:
+    image: grafana/grafana:9.3.6
+    user: "1000:1000"
+    ports:
+      - "8091:3000" # expose to outside
+    restart: unless-stopped
+    volumes:
+      - ./data/grafana_data/grafana_var:/var/lib/grafana
+      - ./data/grafana_data/grafana_etc:/etc/grafana:rw
+

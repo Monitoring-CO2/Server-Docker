@@ -1,0 +1,79 @@
+Pour lancer ou update le serveur 
+
+Verifier que le dossier courant contient
+- deploy.sh
+- application.properties
+- docker-compose.yml
+
+Il faut disposer d'internet
+
+Lancer le script :  ( chmod u+x deploy.sh )
+
+deploy.sh
+
+Le fichier serveur est pris du github
+Le docker compose se cree et se lancer
+Il permet aussi de se reconstruire en cas de MAJ serveur
+Les donnés de DB sont dans le dir data/...
+
+
+
+
+# COMPOSE (etre dans le dir)
+--Build the compose
+docker compose build
+
+--Create the vm
+docker compose create
+
+--Launch the compose
+docker compose start
+
+---OR--- !
+
+# build create & launch
+docker compose up -d
+
+(-d in background)
+
+
+
+
+--stop the compose
+docker compose stop
+
+--stop & remove the compose
+docker compose down
+
+--add --volumes to rm the volumes use :
+docker compose down --volumes
+
+
+# Open shell
+docker compose exec -it <name> sh
+
+sh ou bash
+
+# see <none> images
+docker images -f "dangling=true" -q
+
+# rm <none> images
+docker rmi $(docker images -f "dangling=true" -q)
+
+# See proces on
+docker ps
+
+# See proces all
+docker ps -a
+
+# remove from proces (<nameID> is the id from the ps -a)
+docker rm <nameID> 
+
+# see the image (docker)
+docker images
+
+# remove the docker image
+docker rmi <name>
+
+
+
